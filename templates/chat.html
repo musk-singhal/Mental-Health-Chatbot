@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RoboChatter Chatbot</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		function getResponse() {
+			var message = $("#message").val();
+			$.ajax({
+				type: "POST",
+				url: "/get_response",
+				data: {message: message},
+				success: function(data) {
+					$("#chatlog").append("<p><strong>You:</strong> " + message + "</p>");
+					$("#chatlog").append("<p><strong>RoboChatter:</strong> " + data + "</p>");
+					$("#message").val("");
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<h1>Hi! I'm RoboChatter, your Mental Health Expert!</h1>
+	<div id="chatlog"></div>
+	<div>
+		<input type="text" id="message">
+		<button onclick="getResponse()">Send</button>
+	</div>
+</body>
+</html>
